@@ -1,6 +1,9 @@
 # Depth4ToM-docker
 docker environment for  Depth4ToM
 
+## 目的
+- 透明物体や反射する物体に対するdepthの計算を改善すること
+
 ## original repogitory
 https://github.com/CVLAB-Unibo/Depth4ToM-code
 
@@ -39,4 +42,10 @@ optional arguments:
                         model type: dpt_large, midas_v21
                         
 ```
+
+## TODO
+- weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
+- 適切に動作したら、TensorRT で変換したモデルを使うようにすること。
+- USB カメラとしてleft, right の画像を得て動作させること。
+- ZED SDK のカメラとして読み込んだ画像からこのモデルでdepth計算をさせること
 
