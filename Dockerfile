@@ -9,4 +9,4 @@ WORKDIR /root/Depth4ToM-code
 
 RUN apt update && apt install -y eog nano
 COPY reinstall-opencv.sh /root/Depth4ToM-code
-COPY weights/ /root/Depth4ToM-code
+
