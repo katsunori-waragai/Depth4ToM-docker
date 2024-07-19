@@ -60,6 +60,67 @@ optional arguments:
                         
 ```
 
+
+```
+# python3 create_proxy_stereo.py -h
+usage: create_proxy_stereo.py [-h] [--mono_root MONO_ROOT] [--stereo_root STEREO_ROOT] [--stereo_ext STEREO_EXT] [--scale_factor_16bit_stereo SCALE_FACTOR_16BIT_STEREO]
+                              [--mask_root MASK_ROOT] [--output_root OUTPUT_ROOT] [--debug]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --mono_root MONO_ROOT
+                        folder with mono predictions
+  --stereo_root STEREO_ROOT
+                        folder with stereo predictions
+  --stereo_ext STEREO_EXT
+                        stereo extension.
+  --scale_factor_16bit_stereo SCALE_FACTOR_16BIT_STEREO
+                        16bit scale factor used during saving
+  --mask_root MASK_ROOT
+                        folder with semantic masks
+  --output_root OUTPUT_ROOT
+                        folder with semantic masks
+  --debug
+```
+
+
+
+
+```
+# python3 finetune.py -h           
+usage: finetune.py [-h] [--exp_name EXP_NAME] [--training_datasets TRAINING_DATASETS [TRAINING_DATASETS ...]]
+                   [--training_datasets_dir TRAINING_DATASETS_DIR [TRAINING_DATASETS_DIR ...]] [--training_datasets_txt TRAINING_DATASETS_TXT [TRAINING_DATASETS_TXT ...]]
+                   [-o OUTPUT_PATH] [-m MODEL_PATH] [-t MODEL_TYPE] [-e EPOCHS] [-bs BATCH_SIZE] [--continue_train] [--step_save STEP_SAVE] [--step_log STEP_LOG]
+                   [--step_log_images STEP_LOG_IMAGES]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --exp_name EXP_NAME
+  --training_datasets TRAINING_DATASETS [TRAINING_DATASETS ...]
+                        training datasets
+  --training_datasets_dir TRAINING_DATASETS_DIR [TRAINING_DATASETS_DIR ...]
+                        list of files for each training dataset
+  --training_datasets_txt TRAINING_DATASETS_TXT [TRAINING_DATASETS_TXT ...]
+                        list of files for each training dataset
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        where to save the model
+  -m MODEL_PATH, --model_path MODEL_PATH
+                        path to the trained weights of model
+  -t MODEL_TYPE, --model_type MODEL_TYPE
+                        model type: dpt_large, midas_v21
+  -e EPOCHS, --epochs EPOCHS
+                        number of epochs
+  -bs BATCH_SIZE, --batch_size BATCH_SIZE
+                        batch_size
+  --continue_train      load optimizer and scheduler state dict
+  --step_save STEP_SAVE
+                        number of steps to save the model
+  --step_log STEP_LOG   number of steps to save the model
+  --step_log_images STEP_LOG_IMAGES
+                        number of steps to save the model
+
+```
+
 ## 一括処理
 scripts/generate_virtual_depth.sh
 
