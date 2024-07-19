@@ -121,6 +121,22 @@ optional arguments:
 
 ```
 
+
+#### what is datasetst_txt
+```
+ head datasets/booster/train_stereo.txt 
+Bathroom/camera_00/im0.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bathroom/camera_00/im1.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bathroom/camera_00/im2.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bedroom/camera_00/im0.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bedroom/camera_00/im1.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bedroom/camera_00/im2.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bottle/camera_00/im0.png Bottle/disp_00.npy Bottle/calib_00-02.xml
+Bottle/camera_00/im1.png Bottle/disp_00.npy Bottle/calib_00-02.xml
+Bottle1/camera_00/im0.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
+Bottle1/camera_00/im1.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
+```
+
 ## 一括処理
 scripts/generate_virtual_depth.sh
 
