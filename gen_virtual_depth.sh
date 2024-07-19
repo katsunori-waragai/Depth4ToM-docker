@@ -1,4 +1,4 @@
-root="/root/Depth4ToM/data/Trans10K"
+root="/root/Depth4ToM-code/data"
 cd ..
 
 model="dpt_large" # ["midas_v21", "dpt_large"]

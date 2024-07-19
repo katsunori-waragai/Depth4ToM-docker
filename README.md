@@ -190,6 +190,14 @@ root="path_to_dataset_root"
 
 このなかでrun.pyが呼び出されているので、run.pyの使い方が分かる。
 
+gen_virtual_depth.sh
+docker環境用に修正した上記のscript
+```
+cd scripts
+bash gen_virtual_depth.sh
+```
+として実行する。
+
 
 ## TODO
 - weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
