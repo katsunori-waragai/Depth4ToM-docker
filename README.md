@@ -137,6 +137,24 @@ Bottle1/camera_00/im0.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
 Bottle1/camera_00/im1.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
 ```
 
+
+#### weights
+```
+du weights
+2571052	weights/Table 3/Ft. Virtual Depth (Proxy)
+2571052	weights/Table 3/Ft. Virtual Depth (GT)
+5142108	weights/Table 3
+1756740	weights/Base
+1756732	weights/Table 2/Ft. Base
+1756728	weights/Table 2/Ft. Virtual Depth
+3513464	weights/Table 2
+10412316	weights
+```
+
+-rw-rw-r-- 1 1000 1000 1376378527 Oct  1  2023 weights/Base/dpt_large-base.pt
+-rw-rw-r-- 1 1000 1000  422509849 Oct  1  2023 weights/Base/midas_v21-base.pt
+
+
 ## 一括処理
 scripts/generate_virtual_depth.sh
 
