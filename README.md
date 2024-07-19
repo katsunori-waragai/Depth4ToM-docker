@@ -13,6 +13,23 @@ https://github.com/CVLAB-Unibo/Depth4ToM-code
 
 Note weights.zip is 9GB
 
+move downloaded weights.zip to weights/ folder.
+
+## datasets
+以下の記述にしたがってデータセットをダウンロードする。
+以下の2通りのデータセットがある。
+["Trans10K", "MSD"]
+
+https://github.com/CVLAB-Unibo/Depth4ToM-code?tab=readme-ov-file#arrow_down-get-your-hands-on-the-data
+
+# Docker
+```
+bash docker_build.sh
+bash docker_run.sh
+
+bash reinstall-opencv.sh
+```
+
 ## usage
 
 ```
@@ -42,6 +59,20 @@ optional arguments:
                         model type: dpt_large, midas_v21
                         
 ```
+
+## 一括処理
+scripts/generate_virtual_depth.sh
+
+対象とするデータ・セットに対して、virtual depthを算出するスクリプト
+
+実行させる前に、スクリプトを読むと良い。
+```
+root="path_to_dataset_root"
+```
+という記述があるので、ダウンロードしたデータに合わせて書き直すこと。
+
+このなかでrun.pyが呼び出されているので、run.pyの使い方が分かる。
+
 
 ## TODO
 - weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
