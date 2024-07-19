@@ -137,6 +137,28 @@ Bottle1/camera_00/im0.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
 Bottle1/camera_00/im1.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
 ```
 
+#### downloaded datasets
+tom_training_datasets.zip
+
+1.9G	MSD/train/midas_v21_proxies
+2.8G	MSD/train/dpt_large_proxies
+125M	MSD/train/images
+13M	MSD/train/masks
+4.9G	MSD/train
+3.9M	MSD/test/masks_proxy
+601M	MSD/test/midas_v21_proxies
+890M	MSD/test/dpt_large_proxies
+37M	MSD/test/images
+3.8M	MSD/test/masks
+1.5G	MSD/test
+6.4G	MSD
+
+44M	Trans10K/test/masks_proxy
+2.6G	Trans10K/test/dpt_large_proxies
+467M	Trans10K/test/images
+3.1G	Trans10K/test
+3.1G	Trans10K/
+
 
 #### weights
 ```
