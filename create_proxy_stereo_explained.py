@@ -73,9 +73,12 @@ for root, dirs, files in os.walk(mono_root):
             valid = (stereo > 0).astype(np.float32)
             mono[valid == 0] = 0
 
+            # mask画像を想定している。
+            # そこが、透明物体とか反射の物体とか、事前にわかるとでもいうのか？
             mask_path = mono_path.replace(mono_root, mask_root).replace(".npy", ".png")
             mask = cv2.imread(mask_path, 0)  # cv2.IMREAD_GRAYSCALE
             mask_transparent = (mask * valid) > 0
+            # 拡散反射領域
             mask_lambertian = ((1 - mask) * valid) > 0
 
             mono = (mono - np.min(mono[valid > 0])) / (mono[valid > 0].max() - mono[valid > 0].min())
@@ -93,6 +96,7 @@ for root, dirs, files in os.walk(mono_root):
             os.makedirs(output_path, exist_ok=True)
 
             if debug:
+                # 内訳がわかるようにmatplotlibで描画する。
                 plt.subplot(3,2,1)
                 plt.title("mask_seg")
                 plt.imshow(cv2.resize((mask*255).astype(np.uint8), None, fx=0.25, fy=0.25, interpolation=cv2.INTER_NEAREST))
@@ -112,5 +116,6 @@ for root, dirs, files in os.walk(mono_root):
                 plt.title("merged")
                 plt.imshow(cv2.resize(merged, None, fx=0.25, fy=0.25), vmin=stereo.min(), vmax=stereo.max(), cmap="jet")
                 plt.savefig(os.path.join(output_path, basename.replace(".npy", ".png")))
-            else: 
+            else:
+                # 上記のmerged という単一画像を保存する。
                 np.save(os.path.join(output_path, basename), merged)
