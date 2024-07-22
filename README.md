@@ -349,4 +349,68 @@ loss.py モジュール
 https://amsacta.unibo.it/id/eprint/6876/
 https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
 
+これはステレオ画像を含むのだろうか？
+```commandline
+
+cd data
+mkdir boost
+unzip booster_gt.zip
+```
+
+./test/balanced/Bottles/camera_00
+./test/balanced/Bottles/camera_02
+./test/unbalanced/Bottles/camera_00
+./test/unbalanced/Bottles/camera_01
+
+ ls ./test/unbalanced/Bottles/camera_00
+im0.png  im1.png  im2.png
+
+trainの側のフォルダ構成が違うことに注意
+*.npy ファイルがあること
+warped_mask_cat_col.png
+がある。
+
 ## jetsonでのダウンロードがうまくいかないときは、Linux PCでダウンロードする。
+
+# Q ：　ある領域が透明物体がある領域だという情報をどうやって取得するのだろう？
+- この実装ではどうやっているのだろうか？
+- 拡散反射モデルで説明がつかない領域であることをどうやったら知ることができるのだろう。
+
+
+scripts/table2.sh
+の冒頭のdataset_rootを変更すること
+```commandline
+### Change this path ###
+dataset_root="/media/data2/Booster/train/balanced"
+
+```
+
+pythonコマンドをpython3 コマンドに置き換えること。
+
+skimage.io を使っている。
+
+python3 -m pip install scikit-image
+
+
+そのうえで
+bash table2.sh を実行する。
+
+```commandline
+root@orin:~/Depth4ToM-code/scripts# bash table2.sh
+Namespace(cls2mask=[1], dataset_txt='datasets/booster/train_stereo.txt', input_path='/root/Depth4ToM-code/data/booster/train/balanced', it=1, mask_path='', model_type='midas_v21', model_weights='weights/Base/midas_v21-base.pt', output_list='', output_path='results/Base/midas_v21', save_full_res=False)
+initialize
+device: cuda
+Loading weights:  None
+Using cache found in /root/.cache/torch/hub/facebookresearch_WSL-Images_main
+start processing
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im0.png (1/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im1.png (2/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im2.png (3/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im0.png (4/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im1.png (5/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im2.png (6/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle/camera_00/im0.png (7/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle/camera_00/im1.png (8/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle1/camera_00/im0.png (9/228)
+
+```
