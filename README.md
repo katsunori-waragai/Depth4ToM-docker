@@ -349,7 +349,7 @@ loss.py モジュール
 https://amsacta.unibo.it/id/eprint/6876/
 https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
 
-これはステレオ画像を含むのだろうか？
+これはステレオ画像を含む。
 ```commandline
 
 cd data
