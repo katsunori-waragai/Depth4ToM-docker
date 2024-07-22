@@ -198,6 +198,12 @@ bash gen_virtual_depth.sh
 ```
 として実行する。
 
+実行結果で作成されるディレクトリ
+- mountされるディレクトリにすること。
+　そうしないと、guest環境を抜けた時点で、結果が失われる。
+
+Monocular Virtual Depth Generation
+単眼のdepth 計算なので、まだほしいものにはなっていない。
 
 ## TODO
 - weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
