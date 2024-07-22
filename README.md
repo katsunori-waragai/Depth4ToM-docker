@@ -413,4 +413,13 @@ start processing
   processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle/camera_00/im1.png (8/228)
   processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle1/camera_00/im0.png (9/228)
 
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Washer/camera_00/im6.png (228/228)
+finished
+Number of samples 228
+evaluate_mono.py:66: RuntimeWarning: divide by zero encountered in divide
+  gt = baseline * fx / gt
+CLASS       delta1.25   delta1.20   delta1.15   delta1.10   delta1.05   mae         absrel      rmse        
+All         94.55       91.71       85.66       74.00       50.12       90.83       0.07        120.53      
+ToM         87.42       83.36       72.62       59.63       36.30       122.39      0.12        140.39      
+Other       94.57       91.80       85.99       74.01       50.28       91.08       0.07        119.86 
 ```
