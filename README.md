@@ -338,3 +338,9 @@ total 4531704
 ステレオネットワークを微調整するために、我々のマージ戦略でプロキシ深度マップを生成するには、create_proxy_stereo.pyを使用することができます。 上記で説明したように、我々はステレオネットワークを微調整するためのコードを公開しません。 しかし、我々の実装はRAFT-StereoとCREStereoの公式コードに基づいています。
 
 DeepL.com で見る
+
+
+# https://github.com/CVLAB-Unibo/Depth4ToM-code にあるコードについて
+
+loss.py モジュール
+
