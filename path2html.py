@@ -1,3 +1,10 @@
+"""
+画像ファイルをhtml ファイルで表示させる。
+
+usage:
+
+find . -name "*.png" -print | python3 path2html.py > junk.html
+"""
 from pathlib import Path
 print("<html>")
 while True:
