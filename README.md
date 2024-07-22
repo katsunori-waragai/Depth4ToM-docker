@@ -317,3 +317,13 @@ root@orin:~/Depth4ToM-code/datasets/trans10k# head test.txt
 ./Trans10K/validation/masks
 ./Trans10K/validation/midas_v21_proxies　 # gen_virtual_depth.shで生成される
 
+
+
+root@orin:~/Depth4ToM-code/data/Trans10K/test/dpt_large_proxies# ls -lF | head
+total 4531704
+-rw-rw-r-- 1 1000 1000  786560 Dec 19  2023 1.npy
+-rw-rw-r-- 1 1000 1000  272223 Dec 19  2023 1.png
+-rw-rw-r-- 1 1000 1000  786560 Dec 19  2023 100.npy
+-rw-rw-r-- 1 1000 1000  208652 Dec 19  2023 100.png
+
+このディレクトリに、depthのnpyファイルとpngファイルが格納される。
