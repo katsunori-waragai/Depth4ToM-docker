@@ -52,25 +52,29 @@ def compute_scale_and_shift(prediction, target, mask):
 for root, dirs, files in os.walk(mono_root):
     for mono_path in files:
         # *.npy ファイルはdepth データ
-        if mono_path.endswith(".npy"):   
+        if mono_path.endswith(".npy"):
+            # 単眼depthデータのnpy ファイル
             mono_path = os.path.join(root, mono_path)
             # camera_00 のデータはどこにある
             # tom_training_dataset.zip の中にはなかった。
+            # 他のデータセットなのだろう
             stereo_path = mono_path.replace(mono_root, stereo_root).replace("camera_00/", "")
             if "npy" in stereo_ext:
                  stereo = np.load(stereo_path)
             elif "png" in stereo_ext:
                 stereo_path = stereo_path.replace(".npy", ".png")
                 stereo = cv2.imread(stereo_path, -1).astype(np.float32) / scale_factor_16bit_stereo
-            
+
+            # 単眼depth のnpyのfullpath の値を読み込む
             mono = np.load(os.path.join(mono_root, mono_path))
             mono = cv2.resize(mono, (stereo.shape[1], stereo.shape[0]), cv2.INTER_CUBIC)  
 
+            # stereo depthの値が0であるときに、単眼depth も０としている。
             valid = (stereo > 0).astype(np.float32)
             mono[valid == 0] = 0
 
             mask_path = mono_path.replace(mono_root, mask_root).replace(".npy", ".png")
-            mask = cv2.imread(mask_path, 0)
+            mask = cv2.imread(mask_path, 0)  # cv2.IMREAD_GRAYSCALE
             mask_transparent = (mask * valid) > 0
             mask_lambertian = ((1 - mask) * valid) > 0
 
@@ -79,7 +83,9 @@ for root, dirs, files in os.walk(mono_root):
             mono = mono * a + b
 
             merged = np.zeros(stereo.shape)
+            # 透明領域は単眼depthの値を用いている
             merged[mask_transparent] = mono[mask_transparent]
+            # lambertian (拡散反射の領域) はstereo depthの値を用いる。
             merged[mask_lambertian] = stereo[mask_lambertian]
 
             output_path = os.path.join(output_root, os.path.dirname(mono_path).replace(mono_root + "/", ""))

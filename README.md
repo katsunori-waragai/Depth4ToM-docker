@@ -344,3 +344,9 @@ DeepL.com で見る
 
 loss.py モジュール
 
+
+# 別のデータ・セット
+https://amsacta.unibo.it/id/eprint/6876/
+https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
+
+## jetsonでのダウンロードがうまくいかないときは、Linux PCでダウンロードする。
