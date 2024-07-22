@@ -62,7 +62,7 @@ for root, dirs, files in os.walk(mono_root):
             # camera_00 のデータはどこにある
             # tom_training_dataset.zip の中にはなかった。
             # 他のデータセットなのだろう
-            # booster_gt.zip の中にもcamera_00 はなかった。
+            # booster_gt.zip の中にtrain/balanced/*/camera_00/ があった。
             stereo_path = mono_path.replace(mono_root, stereo_root).replace("camera_00/", "")
             if "npy" in stereo_ext:
                  stereo = np.load(stereo_path)
