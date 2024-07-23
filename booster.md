@@ -5,6 +5,9 @@ https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
 https://cvlab-unibo.github.io/booster-web/
 
 https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
+## pdf
+[Open Challenges in Deep Stereo: the Booster Dataset](https://arxiv.org/pdf/2206.04671)
+
 
 ## 特徴
 - これはステレオ画像を含む。
@@ -436,6 +439,7 @@ du -a train/balanced/Bottle
 
 - 最初から disp_00.npy 視差のデータが含まれていることに注意
 
+### Q: データセットに含まれている視差データは、どうやって計算しているのか
 ## Depth4ToMの中で利用状況
 scripts/table2.sh
 scripts/table3.sh

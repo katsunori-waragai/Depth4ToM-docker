@@ -190,33 +190,25 @@ optional arguments:
 
 ## 一括処理
 scripts/generate_virtual_depth.sh
-
 対象とするデータ・セットに対して、virtual depthを算出するスクリプト
+Monocular Virtual Depth Generation
+単眼のdepth 計算なので、まだほしいものにはなっていない。
 
-実行させる前に、スクリプトを読むと良い。
-```
-root="path_to_dataset_root"
-```
-という記述があるので、ダウンロードしたデータに合わせて書き直すこと。
-
-このなかでrun.pyが呼び出されているので、run.pyの使い方が分かる。
-
-gen_virtual_depth.sh
-docker環境用に修正した上記のscript
+- スクリプトの修正
+    ```
+    root="path_to_dataset_root"
+    ```
+    という記述があるので、ダウンロードしたデータに合わせて書き直すこと。
+    (このなかでrun.pyが呼び出されているので、run.pyの使い方が分かる。
+- 修正後の実行
 ```
 cd scripts
 bash gen_virtual_depth.sh
 ```
-として実行する。
-
-Monocular Virtual Depth Generation
-単眼のdepth 計算なので、まだほしいものにはなっていない。
-
 
 # Q　--mask_path を指定しないとどうなるのか？
 
 推測を行う前に、どこが透明もしくは反射物体であるかを知っているなんて仮定しているのだろうか？
-
 
 # Q　
 ステレオネットワークを微調整するために、我々のマージ戦略でプロキシ深度マップを生成するには、create_proxy_stereo.pyを使用することができます。 上記で説明したように、我々はステレオネットワークを微調整するためのコードを公開しません。 しかし、我々の実装はRAFT-StereoとCREStereoの公式コードに基づいています。
@@ -228,8 +220,6 @@ DeepL.com で見る
 
 loss.py モジュール
 
-
-## jetsonでのダウンロードがうまくいかないときは、Linux PCでダウンロードする。
 
 # Q ：　ある領域が透明物体がある領域だという情報をどうやって取得するのだろう？
 - この実装ではどうやっているのだろうか？
@@ -243,13 +233,7 @@ dataset_root="/media/data2/Booster/train/balanced"
 
 ```
 
-- pythonコマンドをpython3 コマンドに置き換えること。
-
-- `python3 -m pip install scikit-image`
-
-
-そのうえで
-bash table2.sh を実行する。
+- bash table2.sh を実行する。
 
 ```commandline
 root@orin:~/Depth4ToM-code/scripts# bash table2.sh
