@@ -109,17 +109,6 @@ tom_training_datasets.zip
 
 
 # 別のデータ・セット　boost_gt.zip のダウンロード
-https://amsacta.unibo.it/id/eprint/6876/
-https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
-
-- これはステレオ画像を含む。
-- scripts/table2.sh table3.sh で利用している。
-```commandline
-
-cd data
-mkdir boost
-unzip booster_gt.zip
-```
 
 ./test/balanced/Bottles/camera_00
 ./test/balanced/Bottles/camera_02
@@ -128,11 +117,6 @@ unzip booster_gt.zip
 
  ls ./test/unbalanced/Bottles/camera_00
 im0.png  im1.png  im2.png
-
-trainの側のフォルダ構成が違うことに注意
-*.npy ファイルがあること
-warped_mask_cat_col.png
-がある。
 
 
 # Docker
@@ -457,5 +441,3 @@ bash table3.sh で実行できる。
 - 適切に動作したら、TensorRT で変換したモデルを使うようにすること。
 - USB カメラとしてleft, right の画像を得て動作させること。
 - ZED SDK のカメラとして読み込んだ画像からこのモデルでdepth計算をさせること
-
-

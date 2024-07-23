@@ -1,8 +1,27 @@
+# boost_gt.zip のダウンロード
+https://amsacta.unibo.it/id/eprint/6876/
+https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
+
 https://cvlab-unibo.github.io/booster-web/
 
 https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
 
+## 特徴
+- これはステレオ画像を含む。
+- scripts/table2.sh table3.sh で利用している。
+- trainの側のフォルダ構成が違うことに注意
+*.npy ファイル、 warped_mask_cat_col.png がある。
+
+## unzip
+```commandline
+
+cd data
+mkdir boost
+unzip booster_gt.zip
+```
+
 ## ディレクトリ構造
+```commandline
 ./test
 ./test/balanced
 ./test/balanced/Balance
@@ -411,6 +430,8 @@ du -a train/balanced/Bottle
 4	train/balanced/Bottle/calib_00-02.xml
 44	train/balanced/Bottle/mask_cat.png
 131672	train/balanced/Bottle
+
+```
 
 
 - 最初から disp_00.npy 視差のデータが含まれていることに注意
