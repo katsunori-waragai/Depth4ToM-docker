@@ -415,3 +415,9 @@ du -a train/balanced/Bottle
 
 - 最初から disp_00.npy 視差のデータが含まれていることに注意
 
+## Depth4ToMの中で利用状況
+scripts/table2.sh
+scripts/table3.sh
+で利用している。
+
+
