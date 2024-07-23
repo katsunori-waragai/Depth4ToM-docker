@@ -4,7 +4,7 @@ docker environment for  Depth4ToM
 ## 目的
 - 透明物体や反射する物体に対するdepthの計算を改善すること
 
-## original repogitory
+## original repository
 https://github.com/CVLAB-Unibo/Depth4ToM-code
 
 ## pretrained model
@@ -14,13 +14,126 @@ https://github.com/CVLAB-Unibo/Depth4ToM-code
 Note weights.zip is 9GB
 
 move downloaded weights.zip to weights/ folder.
+#### weights
+```
+du weights
+2571052	weights/Table 3/Ft. Virtual Depth (Proxy)
+2571052	weights/Table 3/Ft. Virtual Depth (GT)
+5142108	weights/Table 3
+1756740	weights/Base
+1756732	weights/Table 2/Ft. Base
+1756728	weights/Table 2/Ft. Virtual Depth
+3513464	weights/Table 2
+10412316	weights
+```
+
+-rw-rw-r-- 1 1000 1000 1376378527 Oct  1  2023 weights/Base/dpt_large-base.pt
+-rw-rw-r-- 1 1000 1000  422509849 Oct  1  2023 weights/Base/midas_v21-base.pt
+
+# なぜモデルファイルが２とおりあるのか
+model="dpt_large" # ["midas_v21", "dpt_large"]
+
+```commandline
+
+du -a weights/
+9603304	weights/weights.zip
+4	weights/place_weight_files_here.txt
+1344124	weights/Table 3/Ft. Virtual Depth (Proxy)/dpt_large_final.pt
+1226924	weights/Table 3/Ft. Virtual Depth (Proxy)/midas_v21_final.pt
+2571052	weights/Table 3/Ft. Virtual Depth (Proxy)
+1344124	weights/Table 3/Ft. Virtual Depth (GT)/dpt_large_final.pt
+1226924	weights/Table 3/Ft. Virtual Depth (GT)/midas_v21_final.pt
+2571052	weights/Table 3/Ft. Virtual Depth (GT)
+5142108	weights/Table 3
+1344124	weights/Base/dpt_large-base.pt
+412612	weights/Base/midas_v21-base.pt
+1756740	weights/Base
+4	weights/weights
+1344124	weights/Table 2/Ft. Base/dpt_large_final.pt
+412604	weights/Table 2/Ft. Base/midas_v21_final.pt
+1756732	weights/Table 2/Ft. Base
+1344124	weights/Table 2/Ft. Virtual Depth/dpt_large_final.pt
+412600	weights/Table 2/Ft. Virtual Depth/midas_v21_final.pt
+1756728	weights/Table 2/Ft. Virtual Depth
+3513464	weights/Table 2
+20015628	weights/
+```
+
+gen_virtual_depth.sh ではスクリプトを書き換えることで、両方を実行できるようになっている。
+scripts/table2.sh, scripts/table3.shでは、両方のモデルに対して実行している。
+
+
 
 ## datasets
 以下の記述にしたがってデータセットをダウンロードする。
 以下の2通りのデータセットがある。
 ["Trans10K", "MSD"]
-
 https://github.com/CVLAB-Unibo/Depth4ToM-code?tab=readme-ov-file#arrow_down-get-your-hands-on-the-data
+
+#### what is datasetst_txt
+```
+ head datasets/booster/train_stereo.txt 
+Bathroom/camera_00/im0.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bathroom/camera_00/im1.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bathroom/camera_00/im2.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
+Bedroom/camera_00/im0.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bedroom/camera_00/im1.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bedroom/camera_00/im2.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
+Bottle/camera_00/im0.png Bottle/disp_00.npy Bottle/calib_00-02.xml
+Bottle/camera_00/im1.png Bottle/disp_00.npy Bottle/calib_00-02.xml
+Bottle1/camera_00/im0.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
+Bottle1/camera_00/im1.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
+```
+
+#### downloaded datasets
+tom_training_datasets.zip
+
+1.9G	MSD/train/midas_v21_proxies
+2.8G	MSD/train/dpt_large_proxies
+125M	MSD/train/images
+13M	MSD/train/masks
+4.9G	MSD/train
+3.9M	MSD/test/masks_proxy
+601M	MSD/test/midas_v21_proxies
+890M	MSD/test/dpt_large_proxies
+37M	MSD/test/images
+3.8M	MSD/test/masks
+1.5G	MSD/test
+6.4G	MSD
+
+44M	Trans10K/test/masks_proxy
+2.6G	Trans10K/test/dpt_large_proxies
+467M	Trans10K/test/images
+3.1G	Trans10K/test
+3.1G	Trans10K/
+
+
+# 別のデータ・セット　boost_gt.zip のダウンロード
+https://amsacta.unibo.it/id/eprint/6876/
+https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
+
+- これはステレオ画像を含む。
+- scripts/table2.sh table3.sh で利用している。
+```commandline
+
+cd data
+mkdir boost
+unzip booster_gt.zip
+```
+
+./test/balanced/Bottles/camera_00
+./test/balanced/Bottles/camera_02
+./test/unbalanced/Bottles/camera_00
+./test/unbalanced/Bottles/camera_01
+
+ ls ./test/unbalanced/Bottles/camera_00
+im0.png  im1.png  im2.png
+
+trainの側のフォルダ構成が違うことに注意
+*.npy ファイルがあること
+warped_mask_cat_col.png
+がある。
+
 
 # Docker
 ```
@@ -84,8 +197,6 @@ optional arguments:
 ```
 
 
-
-
 ```
 # python3 finetune.py -h           
 usage: finetune.py [-h] [--exp_name EXP_NAME] [--training_datasets TRAINING_DATASETS [TRAINING_DATASETS ...]]
@@ -122,60 +233,6 @@ optional arguments:
 ```
 
 
-#### what is datasetst_txt
-```
- head datasets/booster/train_stereo.txt 
-Bathroom/camera_00/im0.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
-Bathroom/camera_00/im1.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
-Bathroom/camera_00/im2.png Bathroom/disp_00.npy Bathroom/calib_00-02.xml
-Bedroom/camera_00/im0.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
-Bedroom/camera_00/im1.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
-Bedroom/camera_00/im2.png Bedroom/disp_00.npy Bedroom/calib_00-02.xml
-Bottle/camera_00/im0.png Bottle/disp_00.npy Bottle/calib_00-02.xml
-Bottle/camera_00/im1.png Bottle/disp_00.npy Bottle/calib_00-02.xml
-Bottle1/camera_00/im0.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
-Bottle1/camera_00/im1.png Bottle1/disp_00.npy Bottle1/calib_00-02.xml
-```
-
-#### downloaded datasets
-tom_training_datasets.zip
-
-1.9G	MSD/train/midas_v21_proxies
-2.8G	MSD/train/dpt_large_proxies
-125M	MSD/train/images
-13M	MSD/train/masks
-4.9G	MSD/train
-3.9M	MSD/test/masks_proxy
-601M	MSD/test/midas_v21_proxies
-890M	MSD/test/dpt_large_proxies
-37M	MSD/test/images
-3.8M	MSD/test/masks
-1.5G	MSD/test
-6.4G	MSD
-
-44M	Trans10K/test/masks_proxy
-2.6G	Trans10K/test/dpt_large_proxies
-467M	Trans10K/test/images
-3.1G	Trans10K/test
-3.1G	Trans10K/
-
-
-#### weights
-```
-du weights
-2571052	weights/Table 3/Ft. Virtual Depth (Proxy)
-2571052	weights/Table 3/Ft. Virtual Depth (GT)
-5142108	weights/Table 3
-1756740	weights/Base
-1756732	weights/Table 2/Ft. Base
-1756728	weights/Table 2/Ft. Virtual Depth
-3513464	weights/Table 2
-10412316	weights
-```
-
--rw-rw-r-- 1 1000 1000 1376378527 Oct  1  2023 weights/Base/dpt_large-base.pt
--rw-rw-r-- 1 1000 1000  422509849 Oct  1  2023 weights/Base/midas_v21-base.pt
-
 
 ## 一括処理
 scripts/generate_virtual_depth.sh
@@ -204,13 +261,6 @@ bash gen_virtual_depth.sh
 
 Monocular Virtual Depth Generation
 単眼のdepth 計算なので、まだほしいものにはなっていない。
-
-## TODO
-- weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
-- 適切に動作したら、TensorRT で変換したモデルを使うようにすること。
-- USB カメラとしてleft, right の画像を得て動作させること。
-- ZED SDK のカメラとして読み込んだ画像からこのモデルでdepth計算をさせること
-
 
 
 # du -h datasets/
@@ -345,8 +395,67 @@ DeepL.com で見る
 loss.py モジュール
 
 
-# 別のデータ・セット
-https://amsacta.unibo.it/id/eprint/6876/
-https://amsacta.unibo.it/id/eprint/6876/1/booster_gt.zip
-
 ## jetsonでのダウンロードがうまくいかないときは、Linux PCでダウンロードする。
+
+# Q ：　ある領域が透明物体がある領域だという情報をどうやって取得するのだろう？
+- この実装ではどうやっているのだろうか？
+- 拡散反射モデルで説明がつかない領域であることをどうやったら知ることができるのだろう。
+
+## scripts/table2.sh scripts/table3.sh の実行手順
+- scripts/table2.sh の冒頭のdataset_rootを変更すること
+```commandline
+### Change this path ###
+dataset_root="/media/data2/Booster/train/balanced"
+
+```
+
+- pythonコマンドをpython3 コマンドに置き換えること。
+
+- `python3 -m pip install scikit-image`
+
+
+そのうえで
+bash table2.sh を実行する。
+
+```commandline
+root@orin:~/Depth4ToM-code/scripts# bash table2.sh
+Namespace(cls2mask=[1], dataset_txt='datasets/booster/train_stereo.txt', input_path='/root/Depth4ToM-code/data/booster/train/balanced', it=1, mask_path='', model_type='midas_v21', model_weights='weights/Base/midas_v21-base.pt', output_list='', output_path='results/Base/midas_v21', save_full_res=False)
+initialize
+device: cuda
+Loading weights:  None
+Using cache found in /root/.cache/torch/hub/facebookresearch_WSL-Images_main
+start processing
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im0.png (1/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im1.png (2/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bathroom/camera_00/im2.png (3/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im0.png (4/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im1.png (5/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bedroom/camera_00/im2.png (6/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle/camera_00/im0.png (7/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle/camera_00/im1.png (8/228)
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Bottle1/camera_00/im0.png (9/228)
+
+  processing /root/Depth4ToM-code/data/booster/train/balanced/Washer/camera_00/im6.png (228/228)
+finished
+Number of samples 228
+evaluate_mono.py:66: RuntimeWarning: divide by zero encountered in divide
+  gt = baseline * fx / gt
+CLASS       delta1.25   delta1.20   delta1.15   delta1.10   delta1.05   mae         absrel      rmse        
+All         94.55       91.71       85.66       74.00       50.12       90.83       0.07        120.53      
+ToM         87.42       83.36       72.62       59.63       36.30       122.39      0.12        140.39      
+Other       94.57       91.80       85.99       74.01       50.28       91.08       0.07        119.86 
+```
+
+
+tables3.sh も同様に編集する。
+
+bash table3.sh で実行できる。
+
+
+## TODO
+- weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
+- 適切に動作したら、TensorRT で変換したモデルを使うようにすること。
+- USB カメラとしてleft, right の画像を得て動作させること。
+- ZED SDK のカメラとして読み込んだ画像からこのモデルでdepth計算をさせること
+
+

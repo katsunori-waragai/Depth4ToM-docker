@@ -52,12 +52,17 @@ def compute_scale_and_shift(prediction, target, mask):
 for root, dirs, files in os.walk(mono_root):
     for mono_path in files:
         # *.npy ファイルはdepth データ
+        # boost_gt.zip の展開したものでは
+        # train/balanced/*/disp_00.npy
+        # train/balanced/*/disp_02.npy
+        # などがある。
         if mono_path.endswith(".npy"):
             # 単眼depthデータのnpy ファイル
             mono_path = os.path.join(root, mono_path)
             # camera_00 のデータはどこにある
             # tom_training_dataset.zip の中にはなかった。
             # 他のデータセットなのだろう
+            # booster_gt.zip の中にtrain/balanced/*/camera_00/ があった。
             stereo_path = mono_path.replace(mono_root, stereo_root).replace("camera_00/", "")
             if "npy" in stereo_ext:
                  stereo = np.load(stereo_path)
