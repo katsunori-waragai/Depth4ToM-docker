@@ -428,3 +428,37 @@ Other       94.57       91.80       85.99       74.01       50.28       91.08   
 tables3.sh も同様に編集する。
 
 bash table3.sh で実行できる。
+
+# なぜモデルファイルが２とおりあるのか
+model="dpt_large" # ["midas_v21", "dpt_large"]
+
+```commandline
+
+du -a weights/
+9603304	weights/weights.zip
+4	weights/place_weight_files_here.txt
+1344124	weights/Table 3/Ft. Virtual Depth (Proxy)/dpt_large_final.pt
+1226924	weights/Table 3/Ft. Virtual Depth (Proxy)/midas_v21_final.pt
+2571052	weights/Table 3/Ft. Virtual Depth (Proxy)
+1344124	weights/Table 3/Ft. Virtual Depth (GT)/dpt_large_final.pt
+1226924	weights/Table 3/Ft. Virtual Depth (GT)/midas_v21_final.pt
+2571052	weights/Table 3/Ft. Virtual Depth (GT)
+5142108	weights/Table 3
+1344124	weights/Base/dpt_large-base.pt
+412612	weights/Base/midas_v21-base.pt
+1756740	weights/Base
+4	weights/weights
+1344124	weights/Table 2/Ft. Base/dpt_large_final.pt
+412604	weights/Table 2/Ft. Base/midas_v21_final.pt
+1756732	weights/Table 2/Ft. Base
+1344124	weights/Table 2/Ft. Virtual Depth/dpt_large_final.pt
+412600	weights/Table 2/Ft. Virtual Depth/midas_v21_final.pt
+1756728	weights/Table 2/Ft. Virtual Depth
+3513464	weights/Table 2
+20015628	weights/
+```
+
+gen_virtual_depth.sh ではスクリプトを書き換えることで、両方を実行できるようになっている。
+scripts/table2.sh, scripts/table3.shでは、両方のモデルに対して実行している。
+
+
