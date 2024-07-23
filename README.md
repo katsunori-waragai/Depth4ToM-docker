@@ -376,20 +376,17 @@ warped_mask_cat_col.png
 - この実装ではどうやっているのだろうか？
 - 拡散反射モデルで説明がつかない領域であることをどうやったら知ることができるのだろう。
 
-
-scripts/table2.sh
-の冒頭のdataset_rootを変更すること
+## scripts/table2.sh scripts/table3.sh の実行手順
+- scripts/table2.sh の冒頭のdataset_rootを変更すること
 ```commandline
 ### Change this path ###
 dataset_root="/media/data2/Booster/train/balanced"
 
 ```
 
-pythonコマンドをpython3 コマンドに置き換えること。
+- pythonコマンドをpython3 コマンドに置き換えること。
 
-skimage.io を使っている。
-
-python3 -m pip install scikit-image
+- `python3 -m pip install scikit-image`
 
 
 そのうえで
