@@ -315,42 +315,6 @@ root@orin:~/Depth4ToM-code/datasets/trans10k# head test.txt
 8933.jpg _
 
 
-"midas_v21", "dpt_large"　という２種類のモデルがある。
-["Trans10K", "MSD"]　という2種類のデータセットがある。
-データセットは、"train test validation"の3種類に分割されている。
-.
-./MSD
-./MSD/test
-./MSD/test/dpt_large_proxies # gen_virtual_depth.shで生成される
-./MSD/test/images
-./MSD/test/masks
-./MSD/test/masks_proxy
-./MSD/test/midas_v21_proxies　 # gen_virtual_depth.shで生成される
-./MSD/train
-./MSD/train/dpt_large_proxies　 # gen_virtual_depth.shで生成される
-./MSD/train/images
-./MSD/train/masks
-./MSD/train/midas_v21_proxies　 # gen_virtual_depth.shで生成される
-./Trans10K
-./Trans10K/test
-./Trans10K/test/dpt_large_proxies　 # gen_virtual_depth.shで生成される
-./Trans10K/test/dpt_large_proxies/base
-./Trans10K/test/images
-./Trans10K/test/masks
-./Trans10K/test/masks_proxy
-./Trans10K/test/midas_v21_proxies
-./Trans10K/train
-./Trans10K/train/dpt_large_proxies　 # gen_virtual_depth.shで生成される
-./Trans10K/train/images
-./Trans10K/train/masks
-./Trans10K/train/midas_v21_proxies　 # gen_virtual_depth.shで生成される
-./Trans10K/validation
-./Trans10K/validation/dpt_large_proxies　 # gen_virtual_depth.shで生成される
-./Trans10K/validation/dpt_large_proxies/base
-./Trans10K/validation/images
-./Trans10K/validation/masks
-./Trans10K/validation/midas_v21_proxies　 # gen_virtual_depth.shで生成される
-
 
 
 root@orin:~/Depth4ToM-code/data/Trans10K/test/dpt_large_proxies# ls -lF | head
@@ -362,13 +326,12 @@ total 4531704
 
 このディレクトリに、depthのnpyファイルとpngファイルが格納される。
 
-# Q
---mask_path を指定しないとどうなるのか？
+# Q　--mask_path を指定しないとどうなるのか？
 
 推測を行う前に、どこが透明もしくは反射物体であるかを知っているなんて仮定しているのだろうか？
 
 
-# Q
+# Q　
 ステレオネットワークを微調整するために、我々のマージ戦略でプロキシ深度マップを生成するには、create_proxy_stereo.pyを使用することができます。 上記で説明したように、我々はステレオネットワークを微調整するためのコードを公開しません。 しかし、我々の実装はRAFT-StereoとCREStereoの公式コードに基づいています。
 
 DeepL.com で見る
@@ -437,7 +400,6 @@ bash table3.sh で実行できる。
 
 
 ## TODO
-- weights/ ディレクトリをmount するようにして、一度weights.zip をダウンロードし, unzip したら、それが維持できるようにすること。
 - 適切に動作したら、TensorRT で変換したモデルを使うようにすること。
 - USB カメラとしてleft, right の画像を得て動作させること。
 - ZED SDK のカメラとして読み込んだ画像からこのモデルでdepth計算をさせること
